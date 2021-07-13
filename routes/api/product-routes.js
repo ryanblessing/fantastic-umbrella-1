@@ -5,18 +5,40 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // get all products
 router.get('/', (req, res) => {
+  const query = {}
+  if (req.query.category.id) {
+    query.ProductId = req.query.product_id;
+  }
   // find all products
   // be sure to include its associated Category and Tag data
+  Product.findAll({
+    where: query,
+    include: [Category, Tag]
+  }).then(dbPost => {
+    res.json(dbPost)
+  });
 });
 
 // get one product
 router.get('/:id', (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
+  Product.findOne({
+    where: {
+      id: req.params.id
+    },
+    include: [Category, Tag]
+  }).then(dbPost => {
+    res.json(dbPost)
+  });
 });
 
 // create new product
 router.post('/', (req, res) => {
+  console.log(rec.body);
+  Product.create(req.body).then(dbPost => {
+    res.json(dbPost);
+  });
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -55,7 +77,7 @@ router.put('/:id', (req, res) => {
       id: req.params.id,
     },
   })
-    .then((product) => {
+    .then((roduct) => {
       // find all associated tags from ProductTag
       return ProductTag.findAll({ where: { product_id: req.params.id } });
     })
@@ -91,6 +113,13 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
+  Product.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(dbPost => {
+    res.json(dbPost);
+  });
 });
 
 module.exports = router;
