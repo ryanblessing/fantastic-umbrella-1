@@ -12,27 +12,14 @@ THEN the data for each of these routes is displayed in a formatted JSON
 WHEN I test API POST, PUT, and DELETE routes in Insomnia Core
 THEN I am able to successfully create, update, and delete data in my database
 
-Category
 
-id
 
-Integer
+## Database models 
+Your database should contain the following four models, including the requirements listed for each model
 
-Doesn't allow null values
+## Category
 
-Set as primary key
-
-Uses auto increment
-
-category_name
-
-String
-
-Doesn't allow null values
-
-Product
-
-id
+*id
 
 Integer
 
@@ -42,21 +29,47 @@ Set as primary key
 
 Uses auto increment
 
-product_name
+------------
+
+*category_name
 
 String
 
 Doesn't allow null values
 
-price
 
-Decimal
+## Product
+
+*id
+
+Integer
+
+Doesn't allow null values
+
+Set as primary key
+
+Uses auto increment
+
+----------------------
+
+*product_name
+
+String
+
+Doesn't allow null values
+
+
+## price
+
+*Decimal
 
 Doesn't allow null values
 
 Validates that the value is a decimal
 
-stock
+------------------------------
+
+*stock
 
 Integer
 
@@ -66,9 +79,10 @@ Set a default value of 10
 
 Validates that the value is numeric
 
-category_id
+ 
+## category_id
 
-Integer
+*Integer
 
 References the category model's id
 
@@ -88,7 +102,7 @@ tag_name
 
 String
 
-ProductTag
+## ProductTag
 
 id
 
@@ -100,7 +114,7 @@ Set as primary key
 
 Uses auto increment
 
-product_id
+## product_id
 
 Integer
 
