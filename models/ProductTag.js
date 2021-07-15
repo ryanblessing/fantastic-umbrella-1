@@ -15,13 +15,6 @@ ProductTag.init(
     product_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'product',
-        key: 'id'
-      }
-    },
-    tag_id: {
-      type: DataTypes.INTEGER,
-      references: {
         model: 'tag',
         key: 'id'
       }
@@ -38,14 +31,3 @@ ProductTag.init(
 
 module.exports = ProductTag;
 
-// ## ProductTag
-
-// id
-
-// Integer
-
-// Doesn't allow null values
-
-// Set as primary key
-
-// Uses auto increment

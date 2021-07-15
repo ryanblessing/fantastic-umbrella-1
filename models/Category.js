@@ -6,8 +6,8 @@ class Category extends Model {}
 
 Category.init(
   {
-    type: {
-      category_id: DataTypes.INTEGER,
+    id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
@@ -29,24 +29,3 @@ Category.init(
 module.exports = Category;
 
  
-// ## category_id
-
-// *Integer
-
-// References the category model's id
-
-// Tag
-
-// id
-
-// Integer
-
-// Doesn't allow null values
-
-// Set as primary key
-
-// Uses auto increment
-
-// tag_name
-
-// String

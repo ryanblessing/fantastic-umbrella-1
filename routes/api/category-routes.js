@@ -8,9 +8,17 @@ router.get('/', (req, res) => {
   // find all categories
   // be sure to include its associated Products
   Category.findAll({
-    include: [Product]
-  }).then((dbCategory) => {
+    include: [
+      { model:Product }
+    ]
+  }).then(dbCategory => {
+    if(!dbCategory) {
+      res.status(400).json({ message: "This Category was not found!" })
+    }
     res.json(dbCategory)
+  }) 
+  .catch(err => {
+    res.status(500).json(err);
   });
 });
 
@@ -22,18 +30,28 @@ router.get('/:id', (req, res) => {
       id: req.params.id
     },
     //including its products here
-    include: [Product]
-  }).then((dbCategory) => {
+    include: [{ model:Product }]
+  }).then(dbCategory => {
+    if(!dbCategory) {
+      res.status(400).json({ message: "This Category was not found!" })
+    }
     res.json(dbCategory)
-  })
+  }) 
+  .catch(err => {
+    res.status(500).json(err);
+  });
 });
 
 router.post('/', (req, res) => {
   // create a new category
-  Category.create(req.body).then(dbCategory => {
-    res.json(dbCategory);
+  Category.create({
+    category_name: req.body.category_name
   })
-});
+  .then(dbCategory => res.json(dbCategory))
+  .catch(err => {
+    res.status(500).json(err);
+  });
+})
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
@@ -42,8 +60,14 @@ router.put('/:id', (req, res) => {
       id:req.body.id
     }
   }).then(dbCategory => {
-    res.json(dbCategory )
-  })
+    if(!dbCategory) {
+      res.status(400).json({ message: "This Category was not found!" })
+    }
+    res.json(dbCategory)
+  }) 
+  .catch(err => {
+    res.status(500).json(err);
+  });
 });
 
 router.delete('/:id', (req, res) => {
@@ -53,8 +77,14 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     }
   }).then(dbCategory => {
+    if(!dbCategory) {
+      res.status(400).json({ message: "This Category was not found!" })
+    }
     res.json(dbCategory)
-  })
+  }) 
+  .catch(err => {
+    res.status(500).json(err);
+  });
 });
 
 module.exports = router;
